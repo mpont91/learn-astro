@@ -1,0 +1,32 @@
+---
+
+import { getLangFromUrl, useTranslations, languages } from '../../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Title</title>
+	</head>
+	<body>
+		<ul>
+			{Object.entries(languages).map(([lang, label]) => (
+				<li>
+					<a href={`/${lang}/`}>{label}</a>
+				</li>
+			))}
+		</ul>
+
+		<p>Current language: {lang}</p>
+		<p class="text-xl font-medium">{t('hello')}</p>
+	</body>
+</html>
+
+
